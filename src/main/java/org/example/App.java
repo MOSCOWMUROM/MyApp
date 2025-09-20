@@ -1,26 +1,18 @@
 package org.example;
 
-import lombok.extern.slf4j.Slf4j;
-import org.example.bpp.TransactionBeanPostProcessor;
-import org.example.config.ApplicationConfiguration;
-import org.example.database.ConnectionPool;
-import org.example.models.Company;
-import org.example.repository.CompanyRepository;
-import org.example.repository.CrudRepository;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-
-import javax.swing.text.html.parser.Entity;
-import java.util.List;
+import org.example.database.repository.CrudRepository;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ConfigurableApplicationContext;
 
 
 /**
  * Hello world!
  */
-@Slf4j
+@SpringBootApplication
 public class App {
     public static void main(String[] args) {
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(ApplicationConfiguration.class);
+        ConfigurableApplicationContext context = SpringApplication.run(App.class, args);
         var companyRepository = context.getBean("companyRepository", CrudRepository.class);
         System.out.println(companyRepository.findById(1L));
     }

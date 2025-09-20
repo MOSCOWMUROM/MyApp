@@ -1,10 +1,9 @@
 package org.example.bpp;
 
-import org.example.repository.Transaction;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Proxy;
@@ -12,14 +11,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Component
-public class TransactionBeanPostProcessor implements BeanPostProcessor, ApplicationContextAware {
-    private ApplicationContext applicationContext;
+@RequiredArgsConstructor
+public class TransactionBeanPostProcessor implements BeanPostProcessor {
+    private final ApplicationContext applicationContext;
 
     private final Map<String, Class<?>> beans = new HashMap<>();
 
     @Override
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
-        if(bean.getClass().isAnnotationPresent(Transaction.class)){
+        if (bean.getClass().isAnnotationPresent(Transaction.class)) {
             beans.put(beanName, bean.getClass());
         }
         return bean;
@@ -40,10 +40,5 @@ public class TransactionBeanPostProcessor implements BeanPostProcessor, Applicat
             });
         }
         return bean;
-    }
-
-    @Override
-    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        this.applicationContext = applicationContext;
     }
 }

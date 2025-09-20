@@ -1,21 +1,20 @@
-package org.example.repository;
+package org.example.database.repository;
 
-import org.example.database.ConnectionPool;
-import org.example.models.Company;
-import org.springframework.stereotype.Component;
+import lombok.RequiredArgsConstructor;
+import org.example.bpp.Transaction;
+import org.example.database.pool.ConnectionPool;
+import org.example.database.entity.Company;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.random.RandomGenerator;
+
 @Repository
 @Transaction
-public class CompanyRepository implements CrudRepository<Company> {
+@RequiredArgsConstructor
+public class CompanyRepository implements CrudRepository<Company>{
     private final ConnectionPool connectionPool;
-
-    public CompanyRepository(ConnectionPool connectionPool) {
-        this.connectionPool = connectionPool;
-    }
 
     @Override
     public Optional<Company> findById(Long id) {

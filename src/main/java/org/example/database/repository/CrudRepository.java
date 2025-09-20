@@ -1,4 +1,4 @@
-package org.example.repository;
+package org.example.database.repository;
 
 import java.util.List;
 import java.util.Optional;

@@ -1,4 +1,4 @@
-package org.example.repository;
+package org.example.bpp;
 
 import org.springframework.stereotype.Component;
 
